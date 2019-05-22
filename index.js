@@ -31,22 +31,23 @@ app.post("/:template", (req, res) => {
 
     const template = Handlebars.compile(source);
 
+    const attachments = [];
+
+    for (let i = 0; i < req.files.length; i++) {
+      if (req.files[i]) {
+        attachments.push({
+          filename: req.files[i].name,
+          content: req.files[i]
+        });
+      }
+    }
     const mailOptions = {
       from: "noreply@ghielmimport.ch",
       to: "rickybag99@gmail.com",
       replyTo: req.fields.email,
       subject: "Nuova richiesta di offerta",
       html: template(req.fields),
-      attachments: [
-        {
-          filename: req.files.capitolato.name,
-          content: req.files.capitolato
-        },
-        {
-          filename: req.files.disegni.name,
-          content: req.files.disegni
-        }
-      ]
+      attachments: attachments
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
