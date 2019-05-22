@@ -46,7 +46,7 @@ app.post("/:template", (req, res) => {
 
     const mailOptions = {
       from: "noreply@ghielmimport.ch",
-      to: "rickybag99@gmail.com",
+      to: "valentina.giammito@ghielmimport.ch",
       replyTo: req.fields.email,
       subject: "Nuova richiesta di offerta",
       html: template(req.fields),
@@ -60,6 +60,21 @@ app.post("/:template", (req, res) => {
         res.send(info);
       }
     });
+
+    const clientEmail = fs.readFileSync(
+      path.join(__dirname, `templates/risposta.hbs`),
+      "utf-8"
+    );
+    const clientTemplate = Handlebars.compile(clientEmail);
+
+    const clientMailOptions = {
+      from: "noreply@ghielmimport.ch",
+      to: req.fields.email,
+      subject: "Conferma ricezione richiesta d'offerta",
+      html: clientTemplate()
+    };
+
+    transporter.sendMail(clientMailOptions);
   } catch (error) {
     res.status(404).json(error);
   }
