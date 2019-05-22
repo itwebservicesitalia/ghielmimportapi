@@ -17,6 +17,10 @@ app.listen(1500, () => {
   console.log("Server running on port 1500");
 });
 
+app.get("/", (req, res) => {
+  res.send("Ghielmimport API");
+});
+
 app.post("/:template", (req, res) => {
   try {
     //Load the email template from the /templates directory
