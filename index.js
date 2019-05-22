@@ -33,14 +33,17 @@ app.post("/:template", (req, res) => {
 
     const attachments = [];
 
-    for (let i = 0; i < req.files.length; i++) {
-      if (req.files[i]) {
-        attachments.push({
-          filename: req.files[i].name,
-          content: req.files[i]
-        });
-      }
+    console.log(req.files);
+
+    const fileKeys = Object.keys(req.files);
+
+    for (let i = 0; i < fileKeys.length; i++) {
+      attachments.push({
+        filename: req.files[fileKeys[i]].name,
+        content: req.files[fileKeys[i]]
+      });
     }
+
     const mailOptions = {
       from: "noreply@ghielmimport.ch",
       to: "rickybag99@gmail.com",
