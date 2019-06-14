@@ -33,8 +33,6 @@ app.post("/:template", (req, res) => {
 
     const attachments = [];
 
-    console.log(req.files);
-
     const fileKeys = Object.keys(req.files);
 
     for (let i = 0; i < fileKeys.length; i++) {
@@ -48,7 +46,7 @@ app.post("/:template", (req, res) => {
       from: "noreply@ghielmimport.ch",
       to: "valentina.giammito@ghielmimport.ch",
       replyTo: req.fields.email,
-      subject: "Nuova richiesta di offerta",
+      subject: `Nuova richiesta di offerta ${req.params.template}`,
       html: template(req.fields),
       attachments: attachments
     };
