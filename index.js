@@ -42,9 +42,17 @@ app.post("/:template", (req, res) => {
       });
     }
 
+    let emailReceiver = "valentina.giammito@ghielmimport.ch";
+
+    switch (req.params.template) {
+      case "cemento":
+        emailReceiver = "info@ghielmimport.ch";
+        break;
+    }
+
     const mailOptions = {
       from: "noreply@ghielmimport.ch",
-      to: "valentina.giammito@ghielmimport.ch",
+      to: emailReceiver,
       replyTo: req.fields.email,
       subject: `Nuova richiesta di offerta ${req.params.template}`,
       html: template(req.fields),
