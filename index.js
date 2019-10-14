@@ -42,12 +42,17 @@ app.post("/:template", (req, res) => {
       });
     }
 
-    let emailReceiver = "valentina.giammito@ghielmimport.ch";
+    let emailReceiver;
 
     switch (req.params.template) {
       case "cemento":
-        emailReceiver = "nadia.bevilacqua@ghielmimport.ch";
+        emailReceiver = "paolo.maggi@ghielmimport.ch";
         break;
+      case "ferro":
+        emailReceiver = "antonio.colomban@ghielmimport.ch";
+        break;
+      default:
+        emailReceiver = "valentina.giammito@ghielmimport.ch";
     }
 
     const mailOptions = {
