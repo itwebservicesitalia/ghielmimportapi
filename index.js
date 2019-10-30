@@ -4,8 +4,7 @@ const express = require("express"),
   Handlebars = require("handlebars"),
   formidable = require("express-formidable"),
   fs = require("fs"),
-  path = require("path"),
-  uuid = require("uuid/v4");
+  path = require("path");
 
 const transporter = require("./config/smtp");
 
@@ -73,7 +72,7 @@ app.post("/:template", (req, res) => {
     });
 
     const clientEmail = fs.readFileSync(
-      path.join(__dirname, `templates/risposta.hbs`),
+      path.join(__dirname, `templates/risposta/${req.fields.language}.hbs`),
       "utf-8"
     );
     const clientTemplate = Handlebars.compile(clientEmail);
