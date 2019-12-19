@@ -45,7 +45,7 @@ app.post("/:template", (req, res) => {
 
     switch (req.params.template) {
       case "cemento":
-        emailReceiver = "paolo.maggi@ghielmimport.ch";
+        emailReceiver = "info@ghielmimport.ch";
         break;
       case "ferro":
         emailReceiver = "antonio.colomban@ghielmimport.ch";
