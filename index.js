@@ -1,4 +1,4 @@
-// require("dotenv").config({ path: ".env" });
+require("dotenv").config({ path: ".env" });
 
 const express = require("express"),
   app = express(),
@@ -17,7 +17,7 @@ app.use(cors());
 app.use(formidable());
 
 app.listen(PORT, () => {
-  console.log("Server running on port 1500");
+  console.log(`Server running on port ${PORT}`);
 });
 
 app.get("/", (req, res) => {
@@ -66,6 +66,8 @@ app.post("/:template", (req, res) => {
       html: template(req.fields),
       attachments: attachments
     };
+
+    console.log(req.fields);
 
     transporter.sendMail(mailOptions, function(error, info) {
       if (error) {
