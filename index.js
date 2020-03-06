@@ -8,13 +8,15 @@ const express = require("express"),
   fs = require("fs"),
   path = require("path");
 
+const PORT = process.env.PORT || 1500;
+
 const transporter = require("./config/smtp");
 
 app.use(cors());
 
 app.use(formidable());
 
-app.listen(1500, () => {
+app.listen(PORT, () => {
   console.log("Server running on port 1500");
 });
 
