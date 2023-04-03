@@ -1,12 +1,13 @@
 require("dotenv").config({ path: ".env" });
 
-const express = require("express"),
-  app = express(),
-  cors = require("cors"),
-  Handlebars = require("handlebars"),
-  formidable = require("express-formidable"),
-  fs = require("fs"),
-  path = require("path");
+const express = require("express");
+
+const app = express();
+const cors = require("cors");
+const Handlebars = require("handlebars");
+const formidable = require("express-formidable");
+const fs = require("fs");
+const path = require("path");
 
 const PORT = process.env.PORT || 1500;
 
@@ -41,7 +42,7 @@ app.post("/:template", (req, res) => {
     for (let i = 0; i < fileKeys.length; i++) {
       attachments.push({
         filename: req.files[fileKeys[i]].name,
-        content: req.files[fileKeys[i]]
+        content: req.files[fileKeys[i]],
       });
     }
 
@@ -64,12 +65,12 @@ app.post("/:template", (req, res) => {
       replyTo: req.fields.email,
       subject: `Nuova richiesta di offerta ${req.params.template}`,
       html: template(req.fields),
-      attachments: attachments
+      attachments: attachments,
     };
 
     console.log(req.fields);
 
-    transporter.sendMail(mailOptions, function(error, info) {
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         res.send(error);
       } else {
@@ -87,7 +88,7 @@ app.post("/:template", (req, res) => {
       from: "noreply@ghielmimport.ch",
       to: req.fields.email,
       subject: "Conferma ricezione richiesta d'offerta",
-      html: clientTemplate()
+      html: clientTemplate(),
     };
 
     transporter.sendMail(clientMailOptions);
